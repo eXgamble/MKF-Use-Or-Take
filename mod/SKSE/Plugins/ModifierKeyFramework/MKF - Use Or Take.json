@@ -1,0 +1,48 @@
+{
+  // MKF - Use Or Take: activating an item takes it as always; hold the Modifier Key Framework key to
+  // use it right away: equip weapons, armor, torches, arrows and scrolls, drink potions, eat food and
+  // ingredients, apply poisons. Weapons also get Equip and Draw on the second button (X on a
+  // controller, R on a keyboard). Owned items show their label in red: using them is stealing.
+  // Labels: Interface/Translations/MKF - Use Or Take_<LANGUAGE>.txt
+  "version": 5,
+  "rules": [
+    {
+      "id": "weapons",
+      "target": "object",
+      "requires": { "type": "weapon" },
+      "primary": {},
+      "alternate": [
+        { "label": "$MKFUT_Equip",        "do": "equip" },
+        { "label": "$MKFUT_EquipAndDraw", "do": "equipAndDraw" }
+      ]
+    },
+    {
+      "id": "equipment",
+      "target": "object",
+      "requires": { "type": ["armor", "torch", "ammo", "scroll"] },
+      "primary": {},
+      "alternate": { "label": "$MKFUT_Equip", "do": "equip" }
+    },
+    {
+      "id": "potions",
+      "target": "object",
+      "requires": { "type": "potion" },
+      "primary": {},
+      "alternate": { "label": "$MKFUT_Drink", "do": "use" }
+    },
+    {
+      "id": "food",
+      "target": "object",
+      "requires": { "type": ["food", "ingredient"] },
+      "primary": {},
+      "alternate": { "label": "$MKFUT_Eat", "do": "use" }
+    },
+    {
+      "id": "poisons",
+      "target": "object",
+      "requires": { "type": "poison" },
+      "primary": {},
+      "alternate": { "label": "$MKFUT_Apply", "do": "use" }
+    }
+  ]
+}
