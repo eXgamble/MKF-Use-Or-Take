@@ -1,10 +1,11 @@
 {
   // MKF - Use Or Take: activating an item takes it as always; hold the Modifier Key Framework key to
-  // use it right away: equip weapons, armor, torches, arrows and scrolls, drink potions, eat food and
-  // ingredients, apply poisons. Weapons also get Equip and Draw on the second button (X on a
-  // controller, R on a keyboard). Owned items show their label in red: using them is stealing.
+  // use it right away: equip weapons, armor, torches, arrows and scrolls, drink potions and drinks
+  // (ale, mead, wine), eat food and ingredients, apply poisons (only with a weapon in hand). Weapons
+  // also get Equip and Draw on the second button (X on a controller, R on a keyboard). Owned items
+  // show their label in red: using them is stealing.
   // Labels: Interface/Translations/MKF - Use Or Take_<LANGUAGE>.txt
-  "version": 5,
+  "version": 8,
   "rules": [
     {
       "id": "weapons",
@@ -26,7 +27,7 @@
     {
       "id": "potions",
       "target": "object",
-      "requires": { "type": "potion" },
+      "requires": { "type": ["potion", "drink"] },
       "primary": {},
       "alternate": { "label": "$MKFUT_Drink", "do": "use" }
     },
@@ -34,13 +35,15 @@
       "id": "food",
       "target": "object",
       "requires": { "type": ["food", "ingredient"] },
+      "not": { "type": "drink" },
       "primary": {},
       "alternate": { "label": "$MKFUT_Eat", "do": "use" }
     },
     {
+      // Apply only shows with a weapon in hand (without one the game just says to equip one first)
       "id": "poisons",
       "target": "object",
-      "requires": { "type": "poison" },
+      "requires": { "type": "poison", "playerHasWeapon": true },
       "primary": {},
       "alternate": { "label": "$MKFUT_Apply", "do": "use" }
     }
